@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>TBC by zgabievi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">TBC</h1>
+      <h2 class="project-tagline">TBC Payment System for Laravel 5.*</h2>
+      <a href="https://github.com/zgabievi/TBC" class="btn">View on GitHub</a>
+      <a href="https://github.com/zgabievi/TBC/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/zgabievi/TBC/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="tbc" class="anchor" href="#tbc" aria-hidden="true"><span class="octicon octicon-link"></span></a>TBC</h1>
+
+<p><a href="https://github.com/zgabievi/TBC"><img src="http://i.imgsafe.org/09cb0be.jpg" alt="TBC"></a></p>
+
+<p><a href="https://packagist.org/packages/zgabievi/tbc"><img src="https://poser.pugx.org/zgabievi/TBC/version.png" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/zgabievi/tbc"><img src="https://poser.pugx.org/zgabievi/TBC/d/total.png" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/zgabievi/tbc"><img src="https://poser.pugx.org/zgabievi/TBC/license" alt="License"></a></p>
+
+<p>TBC Payment System for <a href="http://laravel.com/">Laravel 5.*</a></p>
+
+<p>Inspired from <a href="https://github.com/wearede/tbcpay-php">tbcpay-php</a>, created by <a href="https://github.com/sandrodz">Sandro Dzneladze</a></p>
+
+<h2>
+<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table of Contents</h2>
+
+<ul>
+<li>
+<a href="#installation">Installation</a>
+
+<ul>
+<li><a href="#composer">Composer</a></li>
+<li><a href="#laravel">Laravel</a></li>
+</ul>
+</li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#config">Config</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a id="composer" class="anchor" href="#composer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Composer</h3>
+
+<p>Run composer command in your terminal.</p>
+
+<pre><code>composer require zgabievi/tbc
+</code></pre>
+
+<h3>
+<a id="laravel" class="anchor" href="#laravel" aria-hidden="true"><span class="octicon octicon-link"></span></a>Laravel</h3>
+
+<p>Open <code>config/app.php</code> and find the <code>providers</code> key. Add <code>TBCServiceProvider</code> to the array.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-c1">Gabievi\TBC\</span><span class="pl-c1">TBCServiceProvider</span><span class="pl-k">::</span><span class="pl-c1">class</span></span></pre></div>
+
+<p>Find the <code>aliases</code> key and add <code>Facade</code> to the array. </p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-s"><span class="pl-pds">'</span>TBC<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">Gabievi\TBC\</span><span class="pl-c1">TBCFacade</span><span class="pl-k">::</span><span class="pl-c1">class</span></span></pre></div>
+
+<h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p>There are two types of transaction within this system:</p>
+
+<ol>
+<li>
+<strong>SMS</strong> is direct payment, where money is charged in 1 event.</li>
+<li>
+<strong>DMS</strong> is delayed payment, requires 2 events:
+
+<ul>
+<li>First event blocks money on the card</li>
+<li>Second event takes money (It can be carried out when product is shipped to the customer, for example)</li>
+</ul>
+</li>
+</ol>
+
+<p>In every 24 hour the merchant must send the close the business day request to bank server</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>There are several methods you need to know:</p>
+
+<ul>
+<li><code>SMSTransaction($amount, $currency = 981, $description = '', $language = 'GE')</code></li>
+<li><code>DMSAuthorization($amount, $currency = 981, $description = '', $language = 'GE')</code></li>
+<li><code>DMSTransaction($txn_id, $amount, $currency = 981, $description = '', $language = 'GE')</code></li>
+<li><code>GetTransactionResult($txn_id)</code></li>
+<li><code>ReverseTransaction($txn_id, $amount = '', $suspected_fraud = '')</code></li>
+<li><code>RefundTransaction($txn_id)</code></li>
+<li><code>CreditTransaction($txn_id, $amount = '')</code></li>
+<li><code>CloseDay()</code></li>
+</ul>
+
+<h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<p>In your <code>routes.php</code> create route:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-c1">Route</span><span class="pl-k">::</span>get(<span class="pl-s"><span class="pl-pds">'</span>payment/{status}<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">$status</span>) {</span>
+<span class="pl-s1">    <span class="pl-k">if</span> (<span class="pl-smi">$status</span> <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>success<span class="pl-pds">'</span></span>) {</span>
+<span class="pl-s1">        <span class="pl-k">return</span> <span class="pl-c1">TBC</span><span class="pl-k">::</span>GetTransactionResult(request(<span class="pl-s"><span class="pl-pds">'</span>trans_id<span class="pl-pds">'</span></span>));</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">return</span> <span class="pl-s"><span class="pl-pds">'</span>FAIL!<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1">})<span class="pl-k">-&gt;</span>where(<span class="pl-s"><span class="pl-pds">'</span>status<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>success|fail<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Route</span><span class="pl-k">::</span>get(<span class="pl-s"><span class="pl-pds">'</span>pay<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>() {</span>
+<span class="pl-s1">    <span class="pl-k">return</span> view(<span class="pl-s"><span class="pl-pds">'</span>payment.tbc<span class="pl-pds">'</span></span>, [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>start<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">TBC</span><span class="pl-k">::</span>SMSTransaction(<span class="pl-c1">1</span>)</span>
+<span class="pl-s1">    ]);</span>
+<span class="pl-s1">});</span></pre></div>
+
+<p>Create <code>payment/tbc.blade.php</code>. It should look like:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">&lt;</span><span class="pl-k">!</span><span class="pl-c1">doctype</span> <span class="pl-c1">html</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1"><span class="pl-k">&lt;</span><span class="pl-c1">html</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1"><span class="pl-k">&lt;</span><span class="pl-c1">head</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">    <span class="pl-k">&lt;</span><span class="pl-c1">title</span><span class="pl-k">&gt;</span><span class="pl-c1">TBC</span><span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">title</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1"><span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">head</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1"><span class="pl-k">&lt;</span><span class="pl-c1">body</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">@</span><span class="pl-k">if</span>(<span class="pl-c1">isset</span>(<span class="pl-smi">$start</span>[<span class="pl-s"><span class="pl-pds">'</span>error<span class="pl-pds">'</span></span>]))</span>
+<span class="pl-s1">    <span class="pl-k">&lt;</span><span class="pl-c1">h2</span><span class="pl-k">&gt;</span><span class="pl-c1">Error</span>:<span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">h2</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">    <span class="pl-k">&lt;</span><span class="pl-c1">h1</span><span class="pl-k">&gt;</span>{{ <span class="pl-smi">$start</span>[<span class="pl-s"><span class="pl-pds">'</span>error<span class="pl-pds">'</span></span>] }}<span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">h1</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1"><span class="pl-k">@</span><span class="pl-k">elseif</span>(<span class="pl-c1">isset</span>(<span class="pl-smi">$start</span>[<span class="pl-s"><span class="pl-pds">'</span>TRANSACTION_ID<span class="pl-pds">'</span></span>]))</span>
+<span class="pl-s1">    <span class="pl-k">&lt;</span><span class="pl-c1">form</span> <span class="pl-c1">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>returnform<span class="pl-pds">"</span></span> <span class="pl-c1">id</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Pay<span class="pl-pds">"</span></span> <span class="pl-c1">action</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>https://securepay.ufc.ge/ecomm2/ClientHandler<span class="pl-pds">"</span></span> <span class="pl-c1">method</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>POST<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">        <span class="pl-k">&lt;</span><span class="pl-c1">input</span> <span class="pl-c1">type</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span> <span class="pl-c1">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>trans_id<span class="pl-pds">"</span></span> <span class="pl-c1">value</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>{{ <span class="pl-smi">$start</span>['TRANSACTION_ID'] }}<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        <span class="pl-k">&lt;</span><span class="pl-c1">noscript</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">            <span class="pl-k">&lt;</span><span class="pl-c1">center</span><span class="pl-k">&gt;</span><span class="pl-c1">Please</span> <span class="pl-c1">click</span> <span class="pl-c1">the</span> <span class="pl-c1">submit</span> <span class="pl-c1">button</span> <span class="pl-c1">below</span><span class="pl-k">.</span><span class="pl-k">&lt;</span><span class="pl-c1">br</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">            <span class="pl-k">&lt;</span><span class="pl-c1">input</span> <span class="pl-c1">type</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>submit<span class="pl-pds">"</span></span> <span class="pl-c1">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>submit<span class="pl-pds">"</span></span> <span class="pl-c1">value</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Submit<span class="pl-pds">"</span></span><span class="pl-k">&gt;&lt;</span><span class="pl-k">/</span><span class="pl-c1">center</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">        <span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">noscript</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">    <span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">form</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">&lt;</span><span class="pl-c1">script</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">        <span class="pl-c1">window</span><span class="pl-k">.</span><span class="pl-c1">onload</span> <span class="pl-k">=</span> <span class="pl-c1">document</span><span class="pl-k">.</span><span class="pl-c1">forms</span><span class="pl-k">.</span><span class="pl-c1">Pay</span><span class="pl-k">.</span><span class="pl-c1">submit</span>;</span>
+<span class="pl-s1">    <span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">script</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1"><span class="pl-k">@</span><span class="pl-k">endif</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">body</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1"><span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">html</span><span class="pl-k">&gt;</span></span></pre></div>
+
+<h2>
+<a id="config" class="anchor" href="#config" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config</h2>
+
+<p>Publish TBC config file using command:</p>
+
+<pre><code>php artisan vendor:publish
+</code></pre>
+
+<p>Created file <code>config\tbc.php</code>. Inside you can change configuration as you wish.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>TBC is an open-sourced laravel package licensed under the MIT license</p>
+
+<h2>
+<a id="todo" class="anchor" href="#todo" aria-hidden="true"><span class="octicon octicon-link"></span></a>TODO</h2>
+
+<ul>
+<li>[ ] Create tests</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/zgabievi/TBC">TBC</a> is maintained by <a href="https://github.com/zgabievi">zgabievi</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
