@@ -1,6 +1,6 @@
 # TBC
 
-[![TBC](http://i.imgsafe.org/09cb0be.jpg)](https://github.com/zgabievi/TBC)
+[![TBC](https://i.imgsafe.org/fbbe3ce20f.png)](https://github.com/zgabievi/TBC)
 
 [![Latest Stable Version](https://poser.pugx.org/zgabievi/TBC/version.png)](https://packagist.org/packages/zgabievi/tbc)
 [![Total Downloads](https://poser.pugx.org/zgabievi/TBC/d/total.png)](https://packagist.org/packages/zgabievi/tbc)
