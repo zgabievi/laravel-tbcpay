@@ -1,14 +1,14 @@
-# TBC
+# laravel-tbcpay
 
-[![TBC](https://i.imgsafe.org/fbbe3ce20f.png)](https://github.com/zgabievi/TBC)
+> Some updates are comming soon...
 
-[![Latest Stable Version](https://poser.pugx.org/zgabievi/TBC/version.png)](https://packagist.org/packages/zgabievi/tbc)
-[![Total Downloads](https://poser.pugx.org/zgabievi/TBC/d/total.png)](https://packagist.org/packages/zgabievi/tbc)
-[![License](https://poser.pugx.org/zgabievi/TBC/license)](https://packagist.org/packages/zgabievi/tbc)
+[![Latest Stable Version](https://poser.pugx.org/zgabievi/TBC/version?format=flat-square)](https://packagist.org/packages/zgabievi/tbc)
+[![Total Downloads](https://poser.pugx.org/zgabievi/TBC/d/total?format=flat-square)](https://packagist.org/packages/zgabievi/tbc)
+[![License](https://poser.pugx.org/zgabievi/TBC/license?format=flat-square)](https://packagist.org/packages/zgabievi/tbc)
 
-TBC Payment System for [Laravel 5.*](http://laravel.com/)
-
-Inspired from [tbcpay-php](https://github.com/wearede/tbcpay-php), created by [Sandro Dzneladze](https://github.com/sandrodz)
+| TBC Payment |     |
+|:-----------:|:----|
+| [![TBC Payment](https://i.imgsafe.org/fbbe3ce20f.png)](https://github.com/zgabievi/laravel-tbcpay) | "TBC" payment integration for [Laravel 5.*](http://laravel.com/), created for Georgian developers. :bulb: Inspired by [tbcpay-php](https://github.com/wearede/tbcpay-php) from [Sandro Dzneladze](https://github.com/sandrodz) :tada: Pull requests are welcome. |
 
 ## Table of Contents
 - [Installation](#installation)
@@ -240,7 +240,9 @@ Created file `config\tbc.php`. Inside you can change configuration as you wish.
 
 ## License
 
-TBC is an open-sourced laravel package licensed under the MIT license
+laravel-tbcpay is licensed under a  [MIT License](https://github.com/zgabievi/laravel-tbcpay/blob/master/LICENSE).
 
 ## TODO
-- [ ] Create tests
+- [ ] Take response codes from README and put somewhere else
+- [ ] Create some tests to check full functionality
+- [ ] Make TBC facade more Model like
