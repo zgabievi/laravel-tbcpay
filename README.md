@@ -246,3 +246,4 @@ laravel-tbcpay is licensed under a  [MIT License](https://github.com/zgabievi/la
 - [ ] Take response codes from README and put somewhere else
 - [ ] Create some tests to check full functionality
 - [ ] Make TBC facade more Model like
+- [ ] Create payment view in vendor, so that developer won't have to do it manually
