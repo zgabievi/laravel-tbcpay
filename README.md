@@ -1,6 +1,6 @@
 # laravel-tbcpay
 
-> Some updates are comming soon...
+> Some great updates are comming soon...
 
 [![Latest Stable Version](https://poser.pugx.org/zgabievi/TBC/version?format=flat-square)](https://packagist.org/packages/zgabievi/tbc)
 [![Total Downloads](https://poser.pugx.org/zgabievi/TBC/d/total?format=flat-square)](https://packagist.org/packages/zgabievi/tbc)
