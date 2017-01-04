@@ -6,6 +6,7 @@
 [![Total Downloads](https://poser.pugx.org/zgabievi/TBC/d/total?format=flat-square)](https://packagist.org/packages/zgabievi/tbc)
 [![License](https://poser.pugx.org/zgabievi/TBC/license?format=flat-square)](https://packagist.org/packages/zgabievi/tbc)
 [![StyleCI](https://styleci.io/repos/49653979/shield)](https://styleci.io/repos/49653979)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cb764cee108547069452926f8ab81435)](https://www.codacy.com/app/zgabievi/laravel-tbcpay?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=zgabievi/laravel-tbcpay&amp;utm_campaign=Badge_Grade)
 
 | TBC Payment |     |
 |:-----------:|:----|
