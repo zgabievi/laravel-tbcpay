@@ -2,9 +2,9 @@
 
 namespace Gabievi\TBC;
 
-trait TBCTrait {
-     
-     /**
+trait TBCTrait
+{
+    /**
      * @param string $query
      *
      * @return mixed
