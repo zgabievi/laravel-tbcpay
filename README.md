@@ -5,7 +5,7 @@
 [![Latest Stable Version](https://poser.pugx.org/zgabievi/TBC/version?format=flat-square)](https://packagist.org/packages/zgabievi/tbc)
 [![Total Downloads](https://poser.pugx.org/zgabievi/TBC/d/total?format=flat-square)](https://packagist.org/packages/zgabievi/tbc)
 [![License](https://poser.pugx.org/zgabievi/TBC/license?format=flat-square)](https://packagist.org/packages/zgabievi/tbc)
-[![StyleCI](https://styleci.io/repos/46787184/shield)](https://styleci.io/repos/46787184)
+[![StyleCI](https://styleci.io/repos/49653979/shield)](https://styleci.io/repos/49653979)
 
 | TBC Payment |     |
 |:-----------:|:----|
