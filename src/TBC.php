@@ -7,21 +7,6 @@ class TBC
     use TBCTrait;
 
     /**
-     * @var string
-     */
-    private $submitUri = 'https://securepay.ufc.ge:18443/ecomm2/MerchantHandler';
-
-    /**
-     * @var
-     */
-    private $certPath;
-
-    /**
-     * @var
-     */
-    private $certPass;
-
-    /**
      * @var
      */
     private $clientIp;
