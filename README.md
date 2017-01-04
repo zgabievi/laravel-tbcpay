@@ -62,11 +62,11 @@ There are several methods you need to know:
 - `SMSTransaction($amount, $currency = 981, $description = '', $language = 'GE')`
 - `DMSAuthorization($amount, $currency = 981, $description = '', $language = 'GE')`
 - `DMSTransaction($txn_id, $amount, $currency = 981, $description = '', $language = 'GE')`
-- `GetTransactionResult($txn_id)`
-- `ReverseTransaction($txn_id, $amount = '', $suspected_fraud = '')`
-- `RefundTransaction($txn_id)`
-- `CreditTransaction($txn_id, $amount = '')`
-- `CloseDay()`
+- `getTransactionResult($txn_id)`
+- `reverseTransaction($txn_id, $amount = '', $suspected_fraud = '')`
+- `refundTransaction($txn_id)`
+- `creditTransaction($txn_id, $amount = '')`
+- `closeDay()`
 
 ## Examples
 
@@ -75,7 +75,7 @@ In your `routes.php` create route:
 ```php
 Route::get('payment/{status}', function($status) {
     if ($status == 'success') {
-        return TBC::GetTransactionResult(request('trans_id'));
+        return TBC::getTransactionResult(request('trans_id'));
     }
     
     return 'FAIL!';
