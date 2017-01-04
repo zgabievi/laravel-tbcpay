@@ -3,6 +3,7 @@
 namespace Gabievi\TBC;
 
 trait TBCTrait {
+     
      /**
      * @param string $query
      *
