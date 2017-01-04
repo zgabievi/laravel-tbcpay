@@ -12,17 +12,18 @@ class TBCServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config.php' => config_path('tbc.php'),
+            __DIR__.'/config.php' => config_path('tbc.php'),
         ]);
     }
 
     /**
      * Register the application services.
+     *
      * @return void
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/config.php', 'tbc');
+        $this->mergeConfigFrom(__DIR__.'/config.php', 'tbc');
 
         $this->app['tbc'] = $this->app->share(function () {
             return new TBC();
