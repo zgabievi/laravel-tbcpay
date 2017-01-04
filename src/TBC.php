@@ -116,14 +116,7 @@ class TBC
      */
     public function SMSTransaction($amount, $currency = 981, $description = '', $language = 'GE')
     {
-        return $this->process('v', [
-            'amount'         => $amount,
-            'currency'       => $currency,
-            'client_ip_addr' => $this->client_ip,
-            'description'    => $description,
-            'language'       => $language,
-            'msg_type'       => 'SMS',
-        ]);
+        return $this->transaction('v', $amount, $currency, $description, $language);
     }
 
     /**
@@ -136,14 +129,7 @@ class TBC
      */
     public function DMSAuthorization($amount, $currency = 981, $description = '', $language = 'GE')
     {
-        return $this->process('a', [
-            'amount'         => $amount,
-            'currency'       => $currency,
-            'client_ip_addr' => $this->client_ip,
-            'description'    => $description,
-            'language'       => $language,
-            'msg_type'       => 'DMS',
-        ]);
+        return $this->transaction('a', $amount, $currency, $description, $language, 'DMS');
     }
 
     /**
@@ -157,15 +143,34 @@ class TBC
      */
     public function DMSTransaction($txn_id, $amount, $currency = 981, $description = '', $language = 'GE')
     {
-        return $this->process('t', [
-            'trans_id'       => $txn_id,
-            'amount'         => $amount,
-            'currency'       => $currency,
-            'client_ip_addr' => $this->client_ip,
-            'description'    => $description,
-            'language'       => $language,
-            'msg_type'       => 'DMS',
+        return $this->transaction('t', $amount, $currency, $description, $language, 'DMS', [
+            'trans_id' => $txn_id,
         ]);
+    }
+    
+    /**
+     * @param string $command
+     * @param $amount
+     * @param int    $currency
+     * @param string $description
+     * @param string $language
+     * @param string $type
+     * @param array  $additional
+     *
+     * @return array
+     */
+    private function transaction($command, $amount, $currency = 981, $description = '', $language = 'GE', $type = 'SMS', array $additional = []) {
+        return $this->process(
+            $command, 
+            array_merge([
+                'amount' => $amount,
+                'currency'  => $currency,
+                'client_ip_addr' => $this->client_ip,
+                'description' => $description,
+                'language' => $language,
+                'msg_type' => $type, 
+            ], $additional)
+        );
     }
 
     /**
@@ -176,7 +181,7 @@ class TBC
     public function getTransactionResult($txn_id)
     {
         return $this->process('c', [
-            'trans_id'       => $txn_id,
+            'trans_id' => $txn_id,
             'client_ip_addr' => $this->client_ip,
         ]);
     }
@@ -191,8 +196,8 @@ class TBC
     public function reverseTransaction($txn_id, $amount = '', $suspected_fraud = '')
     {
         return $this->process('r', [
-            'trans_id'        => $txn_id,
-            'amount'          => $amount,
+            'trans_id' => $txn_id,
+            'amount' => $amount,
             'suspected_fraud' => $suspected_fraud,
         ]);
     }
@@ -219,7 +224,7 @@ class TBC
     {
         return $this->process('g', [
             'trans_id' => $txn_id,
-            'amount'   => $amount,
+            'amount' => $amount,
         ]);
     }
 
