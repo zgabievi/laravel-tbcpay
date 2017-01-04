@@ -4,6 +4,8 @@ namespace Gabievi\TBC;
 
 class TBC
 {
+    use TBCTrait;
+    
     /**
      * @var string
      */
@@ -33,57 +35,6 @@ class TBC
         $this->cert_pass = config('tbc.cert_pass');
 
         $this->client_ip = request()->getClientIp();
-    }
-
-    /**
-     * @param string $query
-     *
-     * @return mixed
-     */
-    private function cURL($query)
-    {
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $query);
-        curl_setopt($curl, CURLOPT_VERBOSE, '1');
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, '0');
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, '0');
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_SSLCERT, $this->cert_path);
-        curl_setopt($curl, CURLOPT_SSLKEY, $this->cert_path);
-        curl_setopt($curl, CURLOPT_SSLKEYPASSWD, $this->cert_pass);
-        curl_setopt($curl, CURLOPT_URL, $this->submit_url);
-        $result = curl_exec($curl);
-        curl_close($curl);
-
-        return $result;
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return string
-     */
-    private function queryString(array $data = [])
-    {
-        return http_build_query($data);
-    }
-
-    /**
-     * @param $string
-     *
-     * @return array
-     */
-    private function parse($string)
-    {
-        $array1 = explode(PHP_EOL, trim($string));
-        $result = [];
-
-        foreach ($array1 as $key => $value) {
-            $array2 = explode(':', $value);
-            $result[$array2[0]] = trim($array2[1]);
-        }
-
-        return $result;
     }
 
     /**
