@@ -36,14 +36,14 @@ class TBC
     }
 
     /**
-     * @param $query_string
+     * @param string $query
      *
      * @return mixed
      */
-    private function cURL($query_string)
+    private function cURL($query)
     {
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $query_string);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $query);
         curl_setopt($curl, CURLOPT_VERBOSE, '1');
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, '0');
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, '0');
@@ -59,13 +59,13 @@ class TBC
     }
 
     /**
-     * @param $post_fields
+     * @param array $data
      *
      * @return string
      */
-    private function QueryString($post_fields)
+    private function queryString(array $data = [])
     {
-        return http_build_query($post_fields);
+        return http_build_query($data);
     }
 
     /**
@@ -73,7 +73,7 @@ class TBC
      *
      * @return array
      */
-    private function Parse($string)
+    private function parse($string)
     {
         $array1 = explode(PHP_EOL, trim($string));
         $result = [];
@@ -87,17 +87,23 @@ class TBC
     }
 
     /**
-     * @param $post_fields
+     * @param string $command
+     * @param array  $data
      *
      * @return array
      */
-    private function Process($post_fields)
+    private function process($command, array $data = [])
     {
-        $string = $this->QueryString($post_fields);
-        $result = $this->cURL($string);
-        $parsed = $this->Parse($result);
-
-        return $parsed;
+        return $this->parse(
+            $this->cURL(
+                $this->queryString(
+                    array_merge([
+                        'command' => $command,
+                        $data,
+                    ])
+                )
+            )
+        );
     }
 
     /**
@@ -110,8 +116,7 @@ class TBC
      */
     public function SMSTransaction($amount, $currency = 981, $description = '', $language = 'GE')
     {
-        return $this->Process([
-            'command'        => 'v',
+        return $this->process('v', [
             'amount'         => $amount,
             'currency'       => $currency,
             'client_ip_addr' => $this->client_ip,
@@ -131,8 +136,7 @@ class TBC
      */
     public function DMSAuthorization($amount, $currency = 981, $description = '', $language = 'GE')
     {
-        return $this->Process([
-            'command'        => 'a',
+        return $this->process('a', [
             'amount'         => $amount,
             'currency'       => $currency,
             'client_ip_addr' => $this->client_ip,
@@ -153,8 +157,7 @@ class TBC
      */
     public function DMSTransaction($txn_id, $amount, $currency = 981, $description = '', $language = 'GE')
     {
-        return $this->Process([
-            'command'        => 't',
+        return $this->process('t', [
             'trans_id'       => $txn_id,
             'amount'         => $amount,
             'currency'       => $currency,
@@ -170,10 +173,9 @@ class TBC
      *
      * @return array
      */
-    public function GetTransactionResult($txn_id)
+    public function getTransactionResult($txn_id)
     {
-        return $this->Process([
-            'command'        => 'c',
+        return $this->process('c', [
             'trans_id'       => $txn_id,
             'client_ip_addr' => $this->client_ip,
         ]);
@@ -186,10 +188,9 @@ class TBC
      *
      * @return array
      */
-    public function ReverseTransaction($txn_id, $amount = '', $suspected_fraud = '')
+    public function reverseTransaction($txn_id, $amount = '', $suspected_fraud = '')
     {
-        return $this->Process([
-            'command'         => 'r',
+        return $this->process('r', [
             'trans_id'        => $txn_id,
             'amount'          => $amount,
             'suspected_fraud' => $suspected_fraud,
@@ -201,10 +202,9 @@ class TBC
      *
      * @return array
      */
-    public function RefundTransaction($txn_id)
+    public function refundTransaction($txn_id)
     {
-        return $this->Process([
-            'command'  => 'k',
+        return $this->process('k', [
             'trans_id' => $txn_id,
         ]);
     }
@@ -215,10 +215,9 @@ class TBC
      *
      * @return array
      */
-    public function CreditTransaction($txn_id, $amount = '')
+    public function creditTransaction($txn_id, $amount = '')
     {
-        return $this->Process([
-            'command'  => 'g',
+        return $this->process('g', [
             'trans_id' => $txn_id,
             'amount'   => $amount,
         ]);
@@ -227,8 +226,8 @@ class TBC
     /**
      * @return array
      */
-    public function CloseDay()
+    public function closeDay()
     {
-        return $this->Process(['command' => 'b']);
+        return $this->process('b');
     }
 }
