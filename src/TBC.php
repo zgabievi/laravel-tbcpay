@@ -2,6 +2,8 @@
 
 namespace Gabievi\TBC;
 
+use Gabievi\TBC\TBCTrait;
+
 class TBC
 {
     use TBCTrait;
@@ -9,32 +11,32 @@ class TBC
     /**
      * @var string
      */
-    private $submit_url = 'https://securepay.ufc.ge:18443/ecomm2/MerchantHandler';
+    private $submitUri = 'https://securepay.ufc.ge:18443/ecomm2/MerchantHandler';
 
     /**
      * @var
      */
-    private $cert_path;
+    private $certPath;
 
     /**
      * @var
      */
-    private $cert_pass;
+    private $certPass;
 
     /**
      * @var
      */
-    private $client_ip;
+    private $clientIp;
 
     /**
      * TBC constructor.
      */
     public function __construct()
     {
-        $this->cert_path = config('tbc.cert_path');
-        $this->cert_pass = config('tbc.cert_pass');
+        $this->certPath = config('tbc.cert_path');
+        $this->certPass = config('tbc.cert_pass');
 
-        $this->client_ip = request()->getClientIp();
+        $this->clientIp = request()->getClientIp();
     }
 
     /**
@@ -117,7 +119,7 @@ class TBC
             array_merge([
                 'amount'         => $amount,
                 'currency'       => $currency,
-                'client_ip_addr' => $this->client_ip,
+                'client_ip_addr' => $this->clientIp,
                 'description'    => $description,
                 'language'       => $language,
                 'msg_type'       => $type,
@@ -134,7 +136,7 @@ class TBC
     {
         return $this->process('c', [
             'trans_id'       => $txn_id,
-            'client_ip_addr' => $this->client_ip,
+            'client_ip_addr' => $this->clientIp,
         ]);
     }
 
