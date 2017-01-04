@@ -18,7 +18,7 @@ trait TBCTrait
      * @var
      */
     private $certPass;
-    
+
     /**
      * @param string $query
      *
