@@ -147,7 +147,7 @@ class TBC
             'trans_id' => $txn_id,
         ]);
     }
-    
+
     /**
      * @param string $command
      * @param $amount
@@ -159,16 +159,17 @@ class TBC
      *
      * @return array
      */
-    private function transaction($command, $amount, $currency = 981, $description = '', $language = 'GE', $type = 'SMS', array $additional = []) {
+    private function transaction($command, $amount, $currency = 981, $description = '', $language = 'GE', $type = 'SMS', array $additional = [])
+    {
         return $this->process(
-            $command, 
+            $command,
             array_merge([
-                'amount' => $amount,
-                'currency'  => $currency,
+                'amount'         => $amount,
+                'currency'       => $currency,
                 'client_ip_addr' => $this->client_ip,
-                'description' => $description,
-                'language' => $language,
-                'msg_type' => $type, 
+                'description'    => $description,
+                'language'       => $language,
+                'msg_type'       => $type,
             ], $additional)
         );
     }
@@ -181,7 +182,7 @@ class TBC
     public function getTransactionResult($txn_id)
     {
         return $this->process('c', [
-            'trans_id' => $txn_id,
+            'trans_id'       => $txn_id,
             'client_ip_addr' => $this->client_ip,
         ]);
     }
@@ -196,8 +197,8 @@ class TBC
     public function reverseTransaction($txn_id, $amount = '', $suspected_fraud = '')
     {
         return $this->process('r', [
-            'trans_id' => $txn_id,
-            'amount' => $amount,
+            'trans_id'        => $txn_id,
+            'amount'          => $amount,
             'suspected_fraud' => $suspected_fraud,
         ]);
     }
@@ -224,7 +225,7 @@ class TBC
     {
         return $this->process('g', [
             'trans_id' => $txn_id,
-            'amount' => $amount,
+            'amount'   => $amount,
         ]);
     }
 
