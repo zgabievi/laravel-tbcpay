@@ -5,6 +5,21 @@ namespace Gabievi\TBC;
 trait TBCTrait
 {
     /**
+     * @var string
+     */
+    private $submitUri = 'https://securepay.ufc.ge:18443/ecomm2/MerchantHandler';
+
+    /**
+     * @var
+     */
+    private $certPath;
+
+    /**
+     * @var
+     */
+    private $certPass;
+    
+    /**
      * @param string $query
      *
      * @return mixed
