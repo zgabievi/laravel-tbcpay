@@ -2,12 +2,10 @@
 
 namespace Gabievi\TBC;
 
-use Gabievi\TBC\TBCTrait;
-
 class TBC
 {
     use TBCTrait;
-    
+
     /**
      * @var string
      */
