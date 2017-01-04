@@ -25,8 +25,8 @@ class TBCServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/config.php', 'tbc');
 
-        $this->app['tbc'] = $this->app->share(function () {
-            return new TBC();
+        $this->app['tbc'] = app()->share(function () {
+            return new TBC;
         });
     }
 }
