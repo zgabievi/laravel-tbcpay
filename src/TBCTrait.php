@@ -17,10 +17,10 @@ trait TBCTrait {
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, '0');
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, '0');
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_SSLCERT, $this->cert_path);
-        curl_setopt($curl, CURLOPT_SSLKEY, $this->cert_path);
-        curl_setopt($curl, CURLOPT_SSLKEYPASSWD, $this->cert_pass);
-        curl_setopt($curl, CURLOPT_URL, $this->submit_url);
+        curl_setopt($curl, CURLOPT_SSLCERT, $this->certPath);
+        curl_setopt($curl, CURLOPT_SSLKEY, $this->certPath);
+        curl_setopt($curl, CURLOPT_SSLKEYPASSWD, $this->certPass);
+        curl_setopt($curl, CURLOPT_URL, $this->submitUri);
         $result = curl_exec($curl);
         curl_close($curl);
 
