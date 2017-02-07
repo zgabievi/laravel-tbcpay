@@ -62,8 +62,7 @@ trait TBCTrait
         if (!$string) {
             return false;
         }
-         
-
+        
         $params = explode(PHP_EOL, trim($string));
         $result = [];
 
