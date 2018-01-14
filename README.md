@@ -91,7 +91,7 @@ Route::get('pay', function() {
 
 Create `payment/tbc.blade.php`. It should look like:
 
-```php
+```blade
 <!doctype html>
 <html>
 <head>
