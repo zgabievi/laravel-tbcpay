@@ -35,7 +35,7 @@ class TBC
                 $this->queryString(
                     array_merge([
                         'command' => $command
-                    ],$data)
+                    ], $data)
                 )
             )
         );
