@@ -34,9 +34,8 @@ class TBC
             $this->cURL(
                 $this->queryString(
                     array_merge([
-                        'command' => $command,
-                        $data,
-                    ])
+                        'command' => $command
+                    ],$data)
                 )
             )
         );
